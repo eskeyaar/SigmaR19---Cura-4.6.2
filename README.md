@@ -1,4 +1,4 @@
-# SigmaR19---Cura4.8
+# SigmaR19 - Cura 4.6.2
 Made a working version where we can use Cura Latest instead of BCN3D software to slice and print. 
 
 !!!!!!!!!!!!!!!!!!!!Note!!!!!!!!!!!!
