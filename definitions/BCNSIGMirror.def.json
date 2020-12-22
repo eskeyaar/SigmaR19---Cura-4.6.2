@@ -1,0 +1,87 @@
+{
+    "name": "Sigma R19 Mirror",
+    "version": 2,
+    "inherits": "fdmprinter",
+    "metadata": 
+    {
+        "visible": true,
+        "author": "Santy3d",
+        "category": "Custom",
+        "manufacturer": "BCN3D",
+        
+        "file_formats": "text/x-gcode",
+        "platform_offset": [ 0, 0, 0],
+        "machine_extruder_trains":
+        {
+            "0": "bcn319_extruder_left"
+            
+        }
+    },
+
+    "overrides": {
+        "machine_nozzle_temp_enabled": {
+            "value": "True"
+        },
+        "machine_disallowed_areas": { "value": "[[[-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, machine_depth / 2], [-(abs(machine_head_with_fans_polygon[0][0]) + abs(machine_head_with_fans_polygon[2][0])) / 2, -machine_depth / 2], [machine_width / 2, -machine_depth / 2], [machine_width / 2, machine_depth / 2]]] " },
+        "material_bed_temp_wait":{"value":"False"},
+        "print_mode": { "enabled": true },
+        
+        "machine_head_with_fans_polygon":
+        {
+            "default_value":
+            [
+                [-27.8, -58.8],
+                [-27.8, 39.6],
+                [26.2, 39.6],
+                [26.2, -58.8]
+            ]
+        },
+        "material_bed_temp_prepend":{"value":"False"},
+        "machine_acceleration": { "default_value": 600 },
+        "machine_max_jerk_xy": { "value": 12.5 },
+        
+        "machine_center_is_zero": { "default_value": false },
+        
+        
+        "print_sequence":
+        {
+            "enabled": true,
+            "dual_enabled": true,
+            "reset_on_used_extruders_change": true,
+            "dual_value":  "'all_at_once'"
+        },
+		"material_diameter": { "default_value": 2.85 },
+        "machine_extruder_count": { "default_value": 1 },
+        "machine_heated_bed": { "default_value": true },
+        "machine_height": { "default_value": 210 },
+        "machine_gcode_flavor": { "default_value": "Marlin" },
+        "machine_depth": { "default_value": 297 },
+        "machine_width": { "default_value": 210 },
+        "machine_name": { "default_value": "Sigam R19 " },
+        "cool_fan_enabled": { "value": true },
+        "clone_cool_fan" : {"value": true},
+        "clone_cool_fan_gcode":
+        {
+            "dual_value": "print_mode == 'Normal' and extruderValue(0, 'cool_fan_enabled') and extruderValue(1, 'cool_fan_enabled')",
+            "reset_on_used_extruders_change": true,
+            "dual_enabled": true
+        },
+        "purge_in_bucket":
+        {
+            "enabled": "print_mode == 'Normal'",
+            "value": true
+        },
+        "avoid_grinding_filament":
+        {
+            "enabled": true,
+            "value": false
+        },
+        "purge_in_bucket_before_start":
+        {
+            "value": true,
+            "enabled": true
+        },
+        "machine_start_gcode": {"default_value": "G21 ;metric values\nG90 ;absolute positi oning\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nM107 ;start with the fan off\nG28 X0 Y0 ;move X/Y to min endstops\nG28 Z0 ;move Z to min endstops\nG1 Z5 F200 ;safety Z axis movement\nT1 ;switch to the right extruder\nG92 E0 ;zero the extruded length\nG1 E10 F35\nG92 E0\nG1 E-{switch_extruder_retraction_amount} F1000\nG92 E0\nT0 ;switch to the left extruder\nG92 E0 ;zero the extruded length\nG1 E10 F35\nG92 E0\nG4 S2 ;stabilize hotendG1 E-0.5 F1000\nG92 E0\n{clone_cool_fan_gcode}\n{print_mode_gcode}\nG4 P1\nG4 P2\nG4 P3\n" },
+        "machine_end_gcode": {"default_value": "M104 S0 T0 ;left extruder heater off\nM104 S0 T1 ;right extruder heater off\nM140 S0 ;heated bed heater off\nM204 S{machine_acceleration} ;set default acceleration\nM205 X{machine_max_jerk_xy} Y{machine_max_jerk_xy} ;set default jerk\nG91 ;relative positioning\nG1 Z+0.5 E-5 Y+10 F12000 ;move Z up a bit and retract filament\nG28 X0 Y0 ;move X/Y to min endstops so the head is out of the way\nM84 ;steppers off\nG90 ;absolute positioning\n"}      
+    }
+}
