@@ -1,5 +1,5 @@
 # SigmaR19 - Cura 4.6.2
-Made a working version where we can use Cura Latest instead of BCN3D software to slice and print. 
+Made a working version where we can use Main version of Cura  instead of BCN3D software to slice and print. 
 
 !!!!!!!!!!!!!!!!!!!!Note!!!!!!!!!!!!
 
@@ -11,3 +11,7 @@ Included Separated Sigma Mirror, Sigma Duplication and Sigma Dual Mode. - *Not P
 Wil update to have as single machine to select different mode - Later. 
 
 Problem - When dropping model to Mirror/Duplicate Machine, autoarrange is not working, pls move manually. -> will try to fix.
+
+To fix : 
+1.Fix for Cura 4.8 Slicing Bug.
+2.Autoarrange for Mirror/Duplication Mode. 
